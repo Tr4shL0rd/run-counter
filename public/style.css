@@ -1,0 +1,73 @@
+#update-button {
+    background-color: var(--button-base);
+    border: none;
+    color: white;
+    padding: 80px 150px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 50px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+#update-button:hover {
+    background-color: var(--button-hover);
+    color: white;
+}
+#runTally, #name {
+    font-size: 50px;
+}
+.run {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-right: 20px;
+    width: 150px;
+}
+.run:hover {
+    cursor: pointer;
+    background-color: grey;
+    /*color: white;*/
+}
+.run-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 200px;
+}
+.trash {
+    display: flex;
+flex-direction: column;
+justify-content: center;
+
+    
+}
+.trash-icon:hover {
+    color: red;
+}
+
+.wrapper {
+    height: 75vh;
+    display: grid;
+    grid-template-columns: 300px auto 300px;
+}
+
+body {
+    max-width: unset;
+    height: 100vh;
+    background: rgb(32,43,56);
+    background: linear-gradient(45deg, rgba(32,43,56,1) 52%, rgba(52,67,85,1) 100%); 
+}
+.col-1 {
+    margin: 2rem;
+}
+.input {
+    margin-bottom: 4rem;
+}
+
+.col-2 {
+    display: flex;
+flex-direction: column;
+justify-content: center;
+}
