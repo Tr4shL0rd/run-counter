@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/runs" method="POST">
+        <input type="text" placeholder="bossname" name="bossname">
+        <input id="Run" type="text" placeholder="run" name="run">
+        <button type="submit">Submit</button>
+    </form>
+    <center>
+        <h2 id="name"></h2>
+        <h1 id="runTally">0</h1>
+        <button onclick="plusRun()">
+            +1 run
+        </button>
+    </center>
+    <script>
+        function plusRun() {
+            let runTally = document.getElementById('runTally');
+            let runName = document.getElementById('runName');
+            let name = document.getElementById('name');
+            name.innerHTML = runName.value;
+            runTally.innerHTML = parseInt(runTally.innerHTML) +1;
+        }
+    </script>
+</body>
+</html> 
