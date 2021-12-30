@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const sanitizeHTML = require('sanitize-html');
 const mongoClient = require('mongodb').MongoClient;
+const helper = require("./helper.js")
 const app = express();
 require('dotenv').config();
 app.set("view engine", "ejs");
@@ -12,6 +13,14 @@ app.listen(port, () => {
     console.log('Server running on port ' + port);
 });
 
+
+String.prototype.title = function() {
+    return this.toString().replace(
+        /\w\S*/g,
+        txt => {
+            return txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase()
+        });
+};
 mongoClient.connect(process.env.mongodbConnectionString, {
     useUnifiedTopology: true})
         .then(client => {
@@ -40,45 +49,51 @@ mongoClient.connect(process.env.mongodbConnectionString, {
                         console.log(error);
                     });
             });
+            // Sends the bossname (& more)
             app.get("/", (req, res) => {
                 db.collection('runs').find().toArray()
                     .then(results => {
                         // console.log(results);
                         const bossname = sanitizeHTML(req.query.bossname)
-                        console.log(bossname);
+                        console.log("loaded",bossname);
                         let run = null;
                         if (bossname) {
-                            run = results.find(run => run.bossname === bossname);
+                            run = results.find(run => run.bossname.toLowerCase() === bossname.toLowerCase());
+                            // run.bossname = run.bossname.title();
                         }
-                        res.render("index.ejs", { runs: results, run });
+                        res.render(
+                            "index.ejs", { 
+                                runs: results,
+                                run,
+                                helper,
+                                testString: process.env.testString
+                        });
                         // res.redirect("/");
                     })
                     .catch(error => console.error(error));
             });
             app.put("/runs", async (req, res) => {
-                // console.log(req.body);
-                //runsCollection.findOne("run"
                 const allRuns = await runsCollection.find().toArray();
                 const bossname = sanitizeHTML(req.body.bossname);
-                const run = allRuns.find(r => r.bossname === bossname);
+                const run = allRuns.find(r => r.bossname.toLowerCase() === bossname.toLowerCase());
                 if (!run) {
-                    return res.status(404).send("Run not found");
+                    return res.status(404).json({error: "not found"});
+                }
+                const updatedBossRun = {
+                    bossname: run.bossname,
+                    run: run.run+1,
                 }
                 try {
                     const result = await runsCollection.findOneAndUpdate(
                         { bossname: run.bossname },
                         {
-                            $set: {
-                                bossname: run.bossname,
-                                run: run.run + 1
-                            }
+                            $set: updatedBossRun
                         },
                         {
                             upsert: true
                         }
                     )
-                    // console.log(result)
-                    res.json("success")
+                    res.json(updatedBossRun);
                 } catch (error) {
                     console.log(error);
                 }

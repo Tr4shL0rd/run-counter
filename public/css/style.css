@@ -11,9 +11,35 @@
     cursor: pointer;
     border-radius: 10px;
 }
+.update-button-loading  {
+    /*background-color: red !important;
+    transform: rotate(-1deg);
+    */
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+@keyframes shake {
+    10%, 90% {
+        transform: translate3d(-1px,0,0);
+    }
+    20%,80% {
+        transform: translate3d(2px, 0,0);
+    }
+    30%,50%,70% {
+        transform: translate3d(-4px,0,0);
+    }
+    40%,60% {
+        transform: translate3d(4px,0,0);
+    }
+}
 #update-button:hover {
     background-color: var(--button-hover);
     color: white;
+}
+#update-button:hover {
+    background-color: var(--button-base) ;
 }
 #runTally, #name {
     font-size: 50px;
@@ -58,6 +84,7 @@ body {
     height: 100vh;
     background: rgb(32,43,56);
     background: linear-gradient(45deg, rgba(32,43,56,1) 52%, rgba(52,67,85,1) 100%); 
+    overflow: hidden; 
 }
 .col-1 {
     margin: 2rem;
@@ -68,6 +95,17 @@ body {
 
 .col-2 {
     display: flex;
-flex-direction: column;
-justify-content: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+
+.noSelect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }

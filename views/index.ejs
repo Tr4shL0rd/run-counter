@@ -1,3 +1,9 @@
+<!-- 
+TODO
+
+    * add python Title() member function
+
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,12 +12,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="style.css" rel="stylesheet">
-    <link href="https://www.dafontfree.net/embed/Y29tcGFjdGEtZC1yZWd1bGFyJmRhdGEvMzYvYy8xMjcxMDEvY29tcGFjdGFkLnR0Zg" rel="stylesheet" type="text/css"/>
-    <title>Document</title>
+    <link href="css/style.css" rel="stylesheet">
+    <script defer src="js/script.js"></script>
+    <script defer src="js/main.js"></script>
+    
+    <title>Run-Counter </title>
 </head>
 <body>
-    <script defer src="/main.js"></script>
     <div class="wrapper">
         <div class="col-1">
             <div class="input">
@@ -21,14 +28,14 @@
                     <button type="submit">Submit</button>
                 </form>
             </div>
-            <!--<%= runs %> -->
             <div>
                 <h2> RUNS </h2>
                 <% for(let i = 0; i < runs.length; i++) {%>
                     <div class='run-container'>
                         <div class="run" onclick="load('<%= runs[i].bossname %>', '<%= runs[i].run %>')">
                             <div class="bossTable">
-                                <span class="loadBoss" "> <%= runs[i].bossname %>: <%= runs[i].run %></span>
+                                <!-- sidemenu bossname and runs -->
+                                <span class="loadBoss"> <%= helper.title(runs[i].bossname) %>: <%= runs[i].run %></span>
                             </div>
                         </div>
                         <div class="trash" title="DELETE <%= runs[i].bossname %>"onclick="deleteRun('<%= runs[i].bossname %>')"><i class="trash-icon fas fa-trash"></i></div>
@@ -40,65 +47,23 @@
     
                 <center>
                     <% if (run) { %>
-                        <h2 id="name"><%= run.bossname %></h2>
+                        <!-- center screen bossname and runs -->
+                        <h2 id="name"><%= helper.title(run.bossname) %></h2>
                         <h1 id="runTally"><%= run.run %></h1>
                         <%} else { %>
                             <h2 id="name"></h2>
                             <h1 id="runTally">0</h1>
                             <% } %>
                             <div>
-                                <div id="update-button">+</div>
+                                <button id="update-button" class="noSelect">+</button>
+                                <% if (testString) { %>
+                                    <h2 style="color: red;"><%= testString %> </h2>
+                                <% } %>
+                                <h2></h2>
                             </div>
                         </center>
                     </div>
                     <div></div>
-    
-    
-    
     </div>
-
-
-        <script>
-            async function deleteRun(namePressed) {
-                let choice = confirm(`delete ${namePressed}?`)
-                if (!choice) {
-                    return;
-                }
-                try {
-                    
-                    const response = await fetch("/runs", {
-                        method: "delete",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                            bossname: namePressed
-                        })
-                    })    
-                    const data = await response.json();
-                    console.log(data);
-            if (data == "deleted") {
-                window.location.reload();
-            }
-        } catch (error) {
-            console.error(error);
-        }
-    }
-    
-    
-    function load(namePressed, runPressed) {
-        console.log(namePressed, runPressed)
-        
-        runPressed = parseInt(runPressed);
-        let currentRun = document.getElementById("runTally");
-        let currentName = document.getElementById("name");
-        
-        currentRun.innerHTML = runPressed;
-        currentName.innerHTML = namePressed;
-        const searchParams = new URLSearchParams(window.location.search);
-        searchParams.set("bossname", namePressed);
-        //window.location.search = searchParams.toString();
-        var newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
-        history.pushState(null, '', newRelativePathQuery);
-    }
-    </script>
 </body>
 </html> 
