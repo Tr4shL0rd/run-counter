@@ -16,7 +16,9 @@ TODO
     <script defer src="js/script.js"></script>
     <script defer src="js/main.js"></script>
     
-    <title>Run-Counter </title>
+    <% if (testString) { %>
+        <title> <%= testString %> Run-Counter </title>
+    <% } %>
 </head>
 <body>
     <div class="wrapper">
@@ -59,7 +61,6 @@ TODO
                                 <% if (testString) { %>
                                     <h2 style="color: red;"><%= testString %> </h2>
                                 <% } %>
-                                <h2></h2>
                             </div>
                         </center>
             </div>
