@@ -1,7 +1,7 @@
 <!-- 
 TODO
 
-    * add python Title() member function
+    * add favicon
 
 -->
 <!DOCTYPE html>
@@ -20,7 +20,7 @@ TODO
 </head>
 <body>
     <div class="wrapper">
-        <div class="col-1">
+        <div class="col-1 grid-sidebar-left">
             <div class="input">
                 <form action="/runs" method="POST">
                     <input id="bossInput" type="text" placeholder="bossname" name="bossname">
@@ -43,7 +43,7 @@ TODO
                     <% } %>
             </div>
         </div>
-            <div class="col-2">
+            <div class="col-2 grid-main">
     
                 <center>
                     <% if (run) { %>
@@ -62,8 +62,8 @@ TODO
                                 <h2></h2>
                             </div>
                         </center>
-                    </div>
-                    <div></div>
+            </div>
+            <div class="grid-sidebar-right"></div>
     </div>
 </body>
 </html> 
