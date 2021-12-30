@@ -7,9 +7,9 @@ require('dotenv').config();
 app.set("view engine", "ejs");
 app.use(express.static("public"))
 app.use(bodyParser.json());
-
-app.listen(3000, () => {
-    console.log('Server running on port 3000');
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log('Server running on port ' + port);
 });
 
 mongoClient.connect(process.env.mongodbConnectionString, {
