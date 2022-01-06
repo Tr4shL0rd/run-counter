@@ -28,8 +28,12 @@ function load(namePressed, runPressed) {
     let currentRun = document.getElementById("runTally");
     let currentName = document.getElementById("name");
 
-    currentRun.innerHTML = runPressed;
-    currentName.innerHTML = namePressed;
+    let sideBarCurrentRun = document.getElementsByClassName("loadBoss");
+    let nonUpdatedRun = sideBarCurrentRun[0].innerHTML.split(":")[1].trim();
+    nonUpdatedRun.innerHTML = runPressed;
+    
+    currentRun.innerHTML = runPressed;   //updates the run number without needing to refresh the page
+    currentName.innerHTML = namePressed; 
     const searchParams = new URLSearchParams(window.location.search);
     searchParams.set("bossname", namePressed);
     //window.location.search = searchParams.toString();
