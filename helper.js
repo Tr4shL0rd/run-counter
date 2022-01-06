@@ -1,3 +1,7 @@
+function helperTest() {
+    console.log(title('is it working?'));
+    console.log(capitalize('is it working?'));
+}
 function title(str) {
     return str.toString().replace(
         /\w\S*/g,
@@ -9,7 +13,9 @@ function capitalize(str) {
     return str.toString()[0].toUpperCase() + str.toString().substring(1, str.toString().length-1);
 }
 
+
 module.exports = {
     title,
-    capitalize
+    capitalize,
+    helperTest
 }
