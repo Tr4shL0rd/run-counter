@@ -3,6 +3,6 @@
 
 
 # TODO
-- update sidebar run number so it syncs up with the run number in the center of the screen
+- update sync selected sidebar profile with center profile run number 
   - Status: currently working on
   - location: script.js
