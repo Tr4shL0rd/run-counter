@@ -3,6 +3,6 @@
 
 
 # TODO
-- update sync selected sidebar profile with center profile run number 
+- update sync selected sidebar profile with center profile run number    
   - Status: currently working on
   - location: script.js
