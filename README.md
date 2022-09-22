@@ -4,5 +4,5 @@
 
 # TODO
 - sync selected sidebar profile with center profile run number    
-  - Status: currently working on
+  - Status: abandoned
   - location: script.js
